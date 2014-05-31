@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MoWatcher</string>
+    <string name="action_settings">Settings</string>
+    <string name="bem_vindo">Bem Vindo ao Time Manager!</string><string name="hello_world">Hello world!</string>
+    
+    <color name="gray">#222</color>
+    
+    <string name="horas">Horas Gastas</string>
+    
+    <string name="atividade">Atividade Realizada</string>
+    
+    <string name="ok">OK</string>
+
+</resources>
