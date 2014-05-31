@@ -1,16 +1,24 @@
 package com.mowatcher.tempo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+/**
+ * Classe controladora do tempo investido em uma atividade
+ */
 public class GerenciadorTempo {
-	private ArrayList<String> atividades;
+	// private List<String> atividades;
 	private Calendar calendario;
-	private ArrayList<TempoInvestido> tIs;
+	private List<TempoInvestido> tIs;
 	
-	public ArrayList<String> getAtividades() {
-		return atividades;
+	public GerenciadorTempo() {
+		tIs = TempoInvestido.getAll();
 	}
+	
+	public List<String> getAtividades() {
+		return TempoInvestido.getAllAtividades();
+	}
+	
 	public Calendar getCalendario() {
 		return calendario;
 	}
@@ -23,6 +31,7 @@ public class GerenciadorTempo {
 	}
 	public void adicionaTI(TempoInvestido tI){
 		tIs.add(tI);
+		tI.save(); // salva no BD o tempo investido
 	}
 	public String[] getAtividadesMaisRecentes(){
 		//TODO
