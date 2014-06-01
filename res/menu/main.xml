@@ -8,5 +8,20 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
+    <item 
+        android:id="@+id/cadastrar_atividade"
+        android:title="@string/cadastrar_atividade"
+        android:showAsAction="always"
+        />
+    <item 
+        android:id="@+id/ver_listagem"
+        android:title="@string/ver_tarefas"
+        android:showAsAction="always"
+        />
+    <item 
+        android:id="@+id/ver_relatorio"
+        android:title="@string/ver_relatorio"
+        android:showAsAction="always"
+        />
 
 </menu>
