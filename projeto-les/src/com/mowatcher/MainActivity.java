@@ -1,6 +1,9 @@
 package com.mowatcher;
 
+import java.util.GregorianCalendar;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -10,6 +13,7 @@ import com.mowatcher.tempo.EnumPrioridade;
 import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
 import com.mowatcher.tempo.TempoInvestido;
+import com.mowatcher.util.DatabaseSeed;
 
 public class MainActivity extends BaseActivity {
 
@@ -22,6 +26,15 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		gerenciador = new GerenciadorTempo();
+		
+		// popula o BD com o atividades já pré-cadestradas
+		new DatabaseSeed().populaBD();
+		
+		Log.d("DB TST semana atual", String.valueOf(gerenciador.getTemposSemana(0).size()));
+		Log.d("DB TST semana passada", String.valueOf(gerenciador.getTemposSemana(1).size()));
+		Log.d("DB TST semana retrasada", String.valueOf(gerenciador.getTemposSemana(2).size()));
 	}
 	
 	public void cadastrarAtividade(View v) {
@@ -36,9 +49,8 @@ public class MainActivity extends BaseActivity {
 			TempoInvestido ti = new TempoInvestido(nome, 
 						horas, 
 						EnumTipo.LAZER, 
-						EnumPrioridade.BAIXA, 
-						2, 
-						1990);
+						EnumPrioridade.BAIXA,
+						new GregorianCalendar());
 			
 			gerenciador = new GerenciadorTempo();
 			gerenciador.adicionaTI(ti);

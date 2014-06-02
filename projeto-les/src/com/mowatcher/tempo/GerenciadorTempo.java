@@ -1,5 +1,6 @@
 package com.mowatcher.tempo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,12 +17,17 @@ public class GerenciadorTempo {
 	}
 	
 	public List<String> getAtividades() {
-		return TempoInvestido.getAllAtividades();
+		List<String> atividades = new ArrayList<String>();
+		for (TempoInvestido t : tIs) {
+			atividades.add(t.getAtividade());
+		}
+		return atividades;
 	}
 	
 	public Calendar getCalendario() {
 		return calendario;
 	}
+	
 	public void setCalendario(Calendar calendario) {
 		this.calendario = calendario;
 	}
@@ -48,5 +54,15 @@ public class GerenciadorTempo {
 	public float[] getPercentualPrioridade() {
 		//TODO
 		return null;
+	}
+	
+	/**
+	 * Retorna os Tempos Investidos de uma certa semana começando do domingo 
+	 * Ex:
+	 * semana=0 => tempos da semana atual
+	 * semana=1 => tempos da semana passada
+	 */
+	public List<TempoInvestido> getTemposSemana(int semana) {
+		return TempoInvestido.getTemposDaSemana(semana);
 	}
 }
