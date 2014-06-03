@@ -9,8 +9,7 @@ import java.util.List;
  * Classe controladora do tempo investido em uma atividade
  */
 public class GerenciadorTempo {
-	// private List<String> atividades;
-	private Calendar calendario;
+	
 	private List<TempoInvestido> tIs;
 
 	public GerenciadorTempo() {
@@ -25,19 +24,6 @@ public class GerenciadorTempo {
 		return atividades;
 	}
 
-	public Calendar getCalendario() {
-		return calendario;
-	}
-
-	public void setCalendario(Calendar calendario) {
-		this.calendario = calendario;
-	}
-
-	public GerenciadorTempo(Calendar calendario) {
-		super();
-		this.calendario = calendario;
-	}
-
 	public void adicionaTI(TempoInvestido tI) {
 		tIs.add(tI);
 		tI.save(); // salva no BD o tempo investido
@@ -45,7 +31,7 @@ public class GerenciadorTempo {
 
 	public String[] getAtividadesMaisRecentes() {
 		List<String> atividades = new ArrayList<String>();
-		calendario = new GregorianCalendar();
+		Calendar calendario = new GregorianCalendar();
 		for (TempoInvestido t : tIs) {
 			if ((t.getSemanaDoAno() == calendario.get(Calendar.WEEK_OF_YEAR))
 					&& (t.getAno() == calendario.get(Calendar.YEAR)))
@@ -105,6 +91,22 @@ public class GerenciadorTempo {
 			percentuais[i] /= total;
 		}
 		return percentuais;
+	}
+	
+	/**
+	 * Retorna os tempos de um determinado dia de uma semana do ano
+	 * dia = 0 => domingo
+	 */
+	public List<TempoInvestido> getTemposDiaSemana(int dia, int semana) {
+		List<TempoInvestido> tempos = getTemposSemana(semana);
+		List<TempoInvestido> novosTempos = new ArrayList<TempoInvestido>();
+		for (TempoInvestido t: tempos ){
+			Calendar c = Calendar.getInstance();
+			c.setTime(t.getData());
+			if (c.get(Calendar.DAY_OF_WEEK) == dia) 
+				novosTempos.add(t);
+		}
+		return novosTempos;
 	}
 
 	/**

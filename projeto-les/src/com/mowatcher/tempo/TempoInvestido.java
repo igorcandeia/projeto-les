@@ -93,10 +93,11 @@ public class TempoInvestido extends Model{
 	}
 
 	/**
-	 * Retorna a lista de todos os Tempos Investidos existentes no BD
+	 * Retorna a lista de todos os Tempos Investidos existentes no BD 
+	 * ordenados por data
 	 */
 	public static List<TempoInvestido> getAll(){
-		return new Select().from(TempoInvestido.class).execute();
+		return new Select().from(TempoInvestido.class).orderBy("data ASC").execute();
 	}
 
 	/**
@@ -106,7 +107,15 @@ public class TempoInvestido extends Model{
 	public static List<TempoInvestido> getAtividadeByNome( String nome ) {
 		return new Select()
 		.from(TempoInvestido.class)
-		.where("Atividade = ?", nome)
+		.where("atividade = ?", nome)
+		.execute();
+	}
+	
+	public static List<TempoInvestido> getTISAtividadeSemana(String atividade, int semanaDoAno) {
+		return new Select()
+		.from(TempoInvestido.class)
+		.where("atividade = ?", atividade)
+		.where("semanaDoAno = ?", semanaDoAno)
 		.execute();
 	}
 	
@@ -119,7 +128,7 @@ public class TempoInvestido extends Model{
 	 */
 	public static List<TempoInvestido> getTemposDaSemana(int semana) {
 		Calendar cal = Calendar.getInstance();
-		// data de X semanas atr·s
+		// data de X semanas atr√°s
 		Calendar c = new GregorianCalendar(
 				cal.get(Calendar.YEAR),
 				cal.get(Calendar.MONTH),
@@ -134,5 +143,4 @@ public class TempoInvestido extends Model{
 		.where("semanaDoAno = ?", sem)
 		.execute();
 	}
-
 }
