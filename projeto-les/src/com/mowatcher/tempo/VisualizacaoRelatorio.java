@@ -3,8 +3,7 @@ package com.mowatcher.tempo;
 public class VisualizacaoRelatorio implements Comparable<VisualizacaoRelatorio> {
 	private String atividade;
 	private float tempoInvestido;
-	private EnumTipo tipo;
-	private EnumPrioridade prioridade;
+
 
 	public String getAtividade() {
 		return atividade;
@@ -22,29 +21,11 @@ public class VisualizacaoRelatorio implements Comparable<VisualizacaoRelatorio> 
 		this.tempoInvestido = tempoInvestido;
 	}
 
-	public EnumTipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(EnumTipo tipo) {
-		this.tipo = tipo;
-	}
-
-	public EnumPrioridade getPrioridade() {
-		return prioridade;
-	}
-
-	public void setPrioridade(EnumPrioridade prioridade) {
-		this.prioridade = prioridade;
-	}
-
 	public VisualizacaoRelatorio(String atividade, float tempoInvestido,
 			EnumTipo tipo, EnumPrioridade prioridade) {
 		super();
 		this.atividade = atividade;
 		this.tempoInvestido = tempoInvestido;
-		this.tipo = tipo;
-		this.prioridade = prioridade;
 	}
 
 	@Override
