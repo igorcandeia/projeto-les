@@ -2,6 +2,7 @@ package com.mowatcher.tempo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -44,9 +45,10 @@ public class GerenciadorTempo {
 
 	public String[] getAtividadesMaisRecentes() {
 		List<String> atividades = new ArrayList<String>();
+		calendario = new GregorianCalendar();
 		for (TempoInvestido t : tIs) {
-			if ((t.getSemanaDoAno() == Calendar.WEEK_OF_YEAR)
-					&& (t.getAno() == Calendar.YEAR))
+			if ((t.getSemanaDoAno() == calendario.get(Calendar.WEEK_OF_YEAR))
+					&& (t.getAno() == calendario.get(Calendar.YEAR)))
 				atividades.add(t.getAtividade());
 		}
 		String[] array = {};
