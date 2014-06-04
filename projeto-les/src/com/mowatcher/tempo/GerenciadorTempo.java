@@ -2,6 +2,7 @@ package com.mowatcher.tempo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -54,6 +55,7 @@ public class GerenciadorTempo {
 			}
 			relatorioSemanal.add(new VisualizacaoRelatorio(atividades[i], total));
 		}
+		Collections.sort(relatorioSemanal);
 		return relatorioSemanal;
 	}
 
