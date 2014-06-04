@@ -83,15 +83,15 @@ public class GerenciadorTempo {
 		float[] percentuais = { 0, 0, 0, 0, 0 };
 		float total = 0;
 		for (TempoInvestido t : tempos) {
-			if (t.getTipo().equals(EnumPrioridade.BAIXISSIMA)) {
+			if (t.getPrioridade().equals(EnumPrioridade.BAIXISSIMA)) {
 				percentuais[0] += t.getTempo();
-			} else if (t.getTipo().equals(EnumPrioridade.BAIXA)) {
+			} else if (t.getPrioridade().equals(EnumPrioridade.BAIXA)) {
 				percentuais[1] += t.getTempo();
-			} else if (t.getTipo().equals(EnumPrioridade.MEDIA)) {
+			} else if (t.getPrioridade().equals(EnumPrioridade.MEDIA)) {
 				percentuais[2] += t.getTempo();
-			} else if (t.getTipo().equals(EnumPrioridade.ALTA)) {
+			} else if (t.getPrioridade().equals(EnumPrioridade.ALTA)) {
 				percentuais[3] += t.getTempo();
-			} else if (t.getTipo().equals(EnumPrioridade.ALTISSIMA)) {
+			} else if (t.getPrioridade().equals(EnumPrioridade.ALTISSIMA)) {
 				percentuais[4] += t.getTempo();
 			}
 		}
