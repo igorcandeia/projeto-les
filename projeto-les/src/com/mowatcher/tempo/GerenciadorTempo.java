@@ -42,8 +42,19 @@ public class GerenciadorTempo {
 	}
 
 	public List<VisualizacaoRelatorio> getRelatorioSemanal(int semana) {
-		// TODO
-		return null;
+		Calendar calendario = new GregorianCalendar();
+		String[] atividades = getAtividadesMaisRecentes();
+		List<VisualizacaoRelatorio> relatorioSemanal = new ArrayList<VisualizacaoRelatorio>();
+		List<TempoInvestido> tIs;
+		for (int i = 0; i< atividades.length; i++){
+			tIs = TempoInvestido.getTISAtividadeSemana(atividades[i], calendario.get(Calendar.WEEK_OF_YEAR));
+			float total = 0;
+			for (TempoInvestido t : tIs) {
+				total += t.getTempo();
+			}
+			relatorioSemanal.add(new VisualizacaoRelatorio(atividades[i], total));
+		}
+		return relatorioSemanal;
 	}
 
 	public float[] getPercentualUso(int semana) {

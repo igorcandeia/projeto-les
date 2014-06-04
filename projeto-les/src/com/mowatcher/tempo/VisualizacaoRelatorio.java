@@ -21,8 +21,7 @@ public class VisualizacaoRelatorio implements Comparable<VisualizacaoRelatorio> 
 		this.tempoInvestido = tempoInvestido;
 	}
 
-	public VisualizacaoRelatorio(String atividade, float tempoInvestido,
-			EnumTipo tipo, EnumPrioridade prioridade) {
+	public VisualizacaoRelatorio(String atividade, float tempoInvestido) {
 		super();
 		this.atividade = atividade;
 		this.tempoInvestido = tempoInvestido;
