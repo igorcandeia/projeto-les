@@ -107,8 +107,9 @@ public class GerenciadorTempo {
 	}
 	
 	/**
-	 * Retorna os tempos de um determinado dia de uma semana do ano
+	 * Retorna os tempos de um determinado dia de uma semana
 	 * dia = 0 => domingo
+	 * semana = 0 => semana atual
 	 */
 	public List<TempoInvestido> getTemposDiaSemana(int dia, int semana) {
 		List<TempoInvestido> tempos = getTemposSemana(semana);
