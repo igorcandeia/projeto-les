@@ -16,13 +16,20 @@ public class GerenciadorTempo {
 	
 	private List<TempoInvestido> tIs;
 
-	public GerenciadorTempo(String emailUser) {
+	public GerenciadorTempo() {
+	}
+	
+	public void loadAndSyncronizedTIS(String emailUser) {
 		if (AppConfig.BD_LOCAL) {
 			tIs = TempoInvestido.getAll();
 		}
 		if (AppConfig.BD_REMOTE) {
 			tIs = new RequestManager().loadTIS(emailUser);
 		}
+	}
+	
+	public List<TempoInvestido> getTIs() {
+		return tIs;
 	}
 
 	public List<String> getAtividades() {

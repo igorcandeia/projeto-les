@@ -26,10 +26,6 @@ import com.mowatcher.tempo.TempoInvestido;
  */
 public class RequestManager {
 	
-	private StringBuilder s;
-	private boolean result;
-	private JSONObject json;
-
 	/**
 	 * Usada unicamente para debug
 	 */
@@ -41,14 +37,25 @@ public class RequestManager {
 		s.append("]}");
 		return s.toString();
 	}
+	
+	public static String simulateRequest() {
+		JSONObject json = null;
+		try {
+			json = JsonRead.readJsonFromUrl("https://graph.facebook.com/19292868552");
+		} catch (IOException e) {
+			Log.d("Request Erro", e.getMessage());
+		} catch (JSONException e) {
+			Log.d("Request Erro", e.getMessage());
+		}
+		return json.toString();
+	}
 
 	/**
 	 * Envia uma requisição do tipo GET para o servidor, com o intuido de salvar
 	 * determinado TI de um usuário
 	 */
 	public boolean saveTI(TempoInvestido ti, int usuarioId) {
-		result = false;
-		s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
+		StringBuilder s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
 		s.append("ano=" + ti.getAno());
 		s.append("&atividade=" + ti.getAtividade());
 		s.append("&data=" + ti.getData().getTime());
@@ -58,26 +65,20 @@ public class RequestManager {
 		s.append("&tipo=" + ti.getTipo());
 		s.append("&user_id=" + usuarioId);
 
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				HttpClient client = new DefaultHttpClient();
-				HttpGet get = new HttpGet(s.toString());
-				ResponseHandler<String> responseHandler = new BasicResponseHandler();
+		HttpClient client = new DefaultHttpClient();
+		HttpGet get = new HttpGet(s.toString());
+		ResponseHandler<String> responseHandler = new BasicResponseHandler();
 
-				try {
-					String response = client.execute(get, responseHandler);
-					Log.d("Save TI Success", response);
-					result = true;
-				} catch (ClientProtocolException e) {
-					Log.d("Save TI Erro", e.getMessage());
-				} catch (IOException e) {
-					Log.d("Save TI Erro", e.getMessage());
-				}
-
-			}
-		}).start();
-		return result;
+		try {
+			String response = client.execute(get, responseHandler);
+			Log.d("Save TI Success", response);
+			return true;
+		} catch (ClientProtocolException e) {
+			Log.d("Save TI Erro", e.getMessage());
+		} catch (IOException e) {
+			Log.d("Save TI Erro", e.getMessage());
+		}
+		return false;
 	}
 
 	/**
@@ -94,22 +95,11 @@ public class RequestManager {
 	 */
 	public List<TempoInvestido> loadTIS(final String email) {
 		List<TempoInvestido> tempos = null;
-
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					json = JsonRead.readJsonFromUrl(AppConfig.HOST_PORT + "email="
-							+ email);
-				} catch (IOException e) {
-					Log.d("Load TIs Erro", e.getMessage());
-				} catch (JSONException e) {
-					Log.d("Load TIs Erro", e.getMessage());
-				}
-			}
-		}).start();
-		// json = new JSONObject(getJsonTest());
-		try {
+		JSONObject json;
+		try {	
+			json = JsonRead.readJsonFromUrl(AppConfig.HOST_PORT + "?email="+ email);
+			//json = new JSONObject(getJsonTest());
+		
 			JSONArray tis = json.getJSONArray("atividades");
 			tempos = new ArrayList<TempoInvestido>();
 
@@ -130,6 +120,9 @@ public class RequestManager {
 				tempos.add(t);
 			}
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (JSONException e) {
 			Log.d("Load TIs Erro", e.getMessage());
 		}

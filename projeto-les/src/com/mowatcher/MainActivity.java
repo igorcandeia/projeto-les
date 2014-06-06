@@ -1,10 +1,7 @@
 package com.mowatcher;
 
-import java.io.IOException;
 import java.util.GregorianCalendar;
 import java.util.List;
-
-import org.json.JSONException;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -18,12 +15,10 @@ import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
 import com.mowatcher.tempo.TempoInvestido;
 import com.mowatcher.util.DatabaseSeed;
-import com.mowatcher.util.JsonRead;
-import com.mowatcher.util.RequestManager;
 
 public class MainActivity extends BaseActivity {
 
-	GerenciadorTempo gerenciador;
+	GerenciadorTempo gerenciador = new GerenciadorTempo();
 	ListView listField;
 	EditText horasField;
 	EditText atividadeField;
@@ -34,13 +29,24 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		
 		// popula o BD com o atividades já pré-cadastradas
-		// new DatabaseSeed().populaBD();
+		new DatabaseSeed().populaBD();
 		
-		gerenciador = new GerenciadorTempo("joao@gmail.com");
+		gerenciador = new GerenciadorTempo();
 		
-		//Log.d("Json tst", );
-
-		 
+		// Todas as transações que envolvem requisição tem quer ser seguidas por
+		// uma thread nesse estilo, para evitar nullpointerexception
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				gerenciador.loadAndSyncronizedTIS("jose@gmail.com"); // carrega os tis remotamente
+				List<TempoInvestido> tempos = gerenciador.getTIs();
+				if (tempos != null) {
+					Log.d("Json tst", tempos.toString());
+				} else {
+					Log.d("Json tst Erro", "Tempos nas carregados");
+				}
+			}
+		}).start();		
 	}
 	
 	public void cadastrarAtividade(View v) {
@@ -52,17 +58,22 @@ public class MainActivity extends BaseActivity {
 			
 			float horas = Float.parseFloat(horasField.getText().toString());
 			String nome = atividadeField.getText().toString();
-			TempoInvestido ti = new TempoInvestido(nome, 
+			final TempoInvestido ti = new TempoInvestido(nome, 
 						horas, 
 						EnumTipo.LAZER, 
 						EnumPrioridade.BAIXA,
 						new GregorianCalendar());
 			
-			gerenciador = new GerenciadorTempo("joao@gmail.com");
-			gerenciador.adicionaTI(ti, 12342); // ti , idUser
+			// Todas as transações que envolvem requisição tem quer ser seguidas por
+			// uma thread nesse estilo, para evitar nullpointerexception
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					gerenciador.adicionaTI(ti, 12342); // ti , idUser
+					Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
+				}
+			}).start();	
 			
-			//lan�a alert
-			Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -74,5 +85,4 @@ public class MainActivity extends BaseActivity {
 		}
 		return true;
 	}
-
 }
