@@ -1,4 +1,4 @@
-package com.mowatcher;
+package com.mowatcher.activity;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.mowatcher.R;
 import com.mowatcher.tempo.GerenciadorTempo;
 
 public class ListagemActivity extends BaseActivity {

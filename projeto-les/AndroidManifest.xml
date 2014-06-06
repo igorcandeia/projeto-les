@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.mowatcher.ListagemActivity"
+            android:name="com.mowatcher.activity.ListagemActivity"
             android:label="@string/title_activity_listagem_" >
         </activity>
     </application>

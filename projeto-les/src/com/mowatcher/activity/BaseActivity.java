@@ -1,4 +1,9 @@
-package com.mowatcher;
+package com.mowatcher.activity;
+
+import com.mowatcher.MainActivity;
+import com.mowatcher.R;
+import com.mowatcher.R.id;
+import com.mowatcher.R.menu;
 
 import android.app.Activity;
 import android.content.Intent;

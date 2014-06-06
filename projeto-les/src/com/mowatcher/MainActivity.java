@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.mowatcher.activity.BaseActivity;
 import com.mowatcher.tempo.EnumPrioridade;
 import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
