@@ -18,7 +18,7 @@ public class ListagemActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_listagem);
 
-		gerenciador = new GerenciadorTempo();
+		gerenciador = new GerenciadorTempo("joao@gmail.com");
 		listField = (ListView) findViewById(R.id.listagem);
 		List<String> atividades = gerenciador.getAtividades(); 
 		String[] atvs = new String[atividades.size()];

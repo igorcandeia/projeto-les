@@ -10,10 +10,12 @@ import com.mowatcher.tempo.TempoInvestido;
 public class DatabaseSeed {
 	
 	public void populaBD () {
-		// se n„o existir essa devida atividade, ent„o popula o BD
-		// evitar de popular o BD com os mesmos dados
-		if (TempoInvestido.getAtividadeByNome("atividade 1 teste").isEmpty()) {
-			populaSemanas();
+		if (ConfigBD.BD_LOCAL) {
+			// se n√£o existir essa devida atividade, ent√£o popula o BD
+			// evitar de popular o BD com os mesmos dados
+			if (TempoInvestido.getAtividadeByNome("atividade 1 teste").isEmpty()) {
+				populaSemanas();
+			}
 		}
 	}
 	

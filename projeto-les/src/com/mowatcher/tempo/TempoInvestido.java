@@ -92,6 +92,15 @@ public class TempoInvestido extends Model{
 		this.data = data;
 	}
 
+	@Override
+	public String toString() {
+		return "TempoInvestido [atividade=" + atividade + ", tempo=" + tempo + ", semana=" + semanaDoAno
+				+ "]";
+	}
+
+	// Consultas ao BD Local Na Tabela TempoInvestido
+	// ============================================================
+	
 	/**
 	 * Retorna a lista de todos os Tempos Investidos existentes no BD 
 	 * ordenados por data
@@ -108,14 +117,6 @@ public class TempoInvestido extends Model{
 		return new Select()
 		.from(TempoInvestido.class)
 		.where("atividade = ?", nome)
-		.execute();
-	}
-	
-	public static List<TempoInvestido> getTISAtividadeSemana(String atividade, int semanaDoAno) {
-		return new Select()
-		.from(TempoInvestido.class)
-		.where("atividade = ?", atividade)
-		.where("semanaDoAno = ?", semanaDoAno)
 		.execute();
 	}
 	

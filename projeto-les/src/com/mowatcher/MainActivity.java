@@ -1,6 +1,10 @@
 package com.mowatcher;
 
+import java.io.IOException;
 import java.util.GregorianCalendar;
+import java.util.List;
+
+import org.json.JSONException;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +18,8 @@ import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
 import com.mowatcher.tempo.TempoInvestido;
 import com.mowatcher.util.DatabaseSeed;
+import com.mowatcher.util.JsonRead;
+import com.mowatcher.util.RequestManager;
 
 public class MainActivity extends BaseActivity {
 
@@ -27,14 +33,14 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		gerenciador = new GerenciadorTempo();
+		// popula o BD com o atividades jÃ¡ prÃ©-cadastradas
+		// new DatabaseSeed().populaBD();
 		
-		// popula o BD com o atividades já pré-cadestradas
-		new DatabaseSeed().populaBD();
+		gerenciador = new GerenciadorTempo("joao@gmail.com");
 		
-		Log.d("DB TST semana atual", String.valueOf(gerenciador.getTemposSemana(0).size()));
-		Log.d("DB TST semana passada", String.valueOf(gerenciador.getTemposSemana(1).size()));
-		Log.d("DB TST semana retrasada", String.valueOf(gerenciador.getTemposSemana(2).size()));
+		//Log.d("Json tst", );
+
+		 
 	}
 	
 	public void cadastrarAtividade(View v) {
@@ -52,10 +58,10 @@ public class MainActivity extends BaseActivity {
 						EnumPrioridade.BAIXA,
 						new GregorianCalendar());
 			
-			gerenciador = new GerenciadorTempo();
-			gerenciador.adicionaTI(ti);
+			gerenciador = new GerenciadorTempo("joao@gmail.com");
+			gerenciador.adicionaTI(ti, 12342); // ti , idUser
 			
-			//lança alert
+			//lanï¿½a alert
 			Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
 		}
 	}
