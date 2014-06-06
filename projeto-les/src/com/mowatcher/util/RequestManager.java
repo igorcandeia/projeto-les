@@ -25,8 +25,7 @@ import com.mowatcher.tempo.TempoInvestido;
  * Responsável por gerenciar as requisições para o servidor remoto.
  */
 public class RequestManager {
-
-	private static final String HOST_PORT = "http://ec2-54-187-243-43.us-west-2.compute.amazonaws.com:9090/";
+	
 	private StringBuilder s;
 	private boolean result;
 	private JSONObject json;
@@ -49,7 +48,7 @@ public class RequestManager {
 	 */
 	public boolean saveTI(TempoInvestido ti, int usuarioId) {
 		result = false;
-		s = new StringBuilder(HOST_PORT + "save_db?");
+		s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
 		s.append("ano=" + ti.getAno());
 		s.append("&atividade=" + ti.getAtividade());
 		s.append("&data=" + ti.getData().getTime());
@@ -94,14 +93,13 @@ public class RequestManager {
 	 * {"atividade":"outracoisa","tempo":"20","tipo":"LAZER","prioridade":"ALTA","data":"1401839455670" } ]}
 	 */
 	public List<TempoInvestido> loadTIS(final String email) {
-
 		List<TempoInvestido> tempos = null;
 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					json = JsonRead.readJsonFromUrl(HOST_PORT + "email="
+					json = JsonRead.readJsonFromUrl(AppConfig.HOST_PORT + "email="
 							+ email);
 				} catch (IOException e) {
 					Log.d("Load TIs Erro", e.getMessage());

@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import com.mowatcher.util.ConfigBD;
+import com.mowatcher.util.AppConfig;
 import com.mowatcher.util.RequestManager;
 
 /**
@@ -17,10 +17,10 @@ public class GerenciadorTempo {
 	private List<TempoInvestido> tIs;
 
 	public GerenciadorTempo(String emailUser) {
-		if (ConfigBD.BD_LOCAL) {
+		if (AppConfig.BD_LOCAL) {
 			tIs = TempoInvestido.getAll();
 		}
-		if (ConfigBD.BD_REMOTE) {
+		if (AppConfig.BD_REMOTE) {
 			tIs = new RequestManager().loadTIS(emailUser);
 		}
 	}
@@ -35,10 +35,10 @@ public class GerenciadorTempo {
 
 	public void adicionaTI(TempoInvestido tI, int userID) {
 		tIs.add(tI);
-		if (ConfigBD.BD_LOCAL) {
+		if (AppConfig.BD_LOCAL) {
 			tI.save(); // salva no BD o T.I.
 		}
-		if (ConfigBD.BD_REMOTE) {
+		if (AppConfig.BD_REMOTE) {
 			new RequestManager().saveTI(tI, userID);
 		}
 	}

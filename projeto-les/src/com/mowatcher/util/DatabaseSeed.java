@@ -10,7 +10,7 @@ import com.mowatcher.tempo.TempoInvestido;
 public class DatabaseSeed {
 	
 	public void populaBD () {
-		if (ConfigBD.BD_LOCAL) {
+		if (AppConfig.BD_LOCAL) {
 			// se não existir essa devida atividade, então popula o BD
 			// evitar de popular o BD com os mesmos dados
 			if (TempoInvestido.getAtividadeByNome("atividade 1 teste").isEmpty()) {
