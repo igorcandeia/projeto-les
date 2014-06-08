@@ -32,21 +32,6 @@ public class MainActivity extends BaseActivity {
 		
 		// popula o BD com o atividades já pré-cadastradas
 		new DatabaseSeed().populaBD();
-		
-		// Todas as transações que envolvem requisição tem quer ser seguidas por
-		// uma thread nesse estilo, para evitar nullpointerexception
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				gerenciador.loadAndSyncronizedTIS(1L); // carrega os tis remotamente
-				List<TempoInvestido> tempos = gerenciador.getTIs();
-				if (tempos != null) {
-					Log.d("Json tst", tempos.toString());
-				} else {
-					Log.d("Json tst Erro", "Tempos nas carregados");
-				}
-			}
-		}).start();		
 	}
 	
 	public void cadastrarAtividade(View v) {
