@@ -62,13 +62,13 @@ public class RequestManager {
 			
 			StringBuilder s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
 			s.append("ano=" + ti.getAno());
-			s.append("&atividade=" + URLEncoder.encode(ti.getAtividade(), "UTF-8"));
-			s.append("&data=" + ti.getData().getTime());
-			s.append("&prioridade=" + ti.getPrioridade());
+			s.append("&atividade='" + URLEncoder.encode(ti.getAtividade() , "utf-8")  + "'");
+			s.append("&data='" + ti.getData().getTime() + "'");
+			s.append("&prioridade='" + ti.getPrioridade() + "'");
 			s.append("&semanaDoAno=" + ti.getSemanaDoAno());
 			s.append("&tempo=" + ti.getTempo());
-			s.append("&tipo=" + ti.getTipo());
-			s.append("&user_id=" + usuarioId);
+			s.append("&tipo='" + ti.getTipo() + "'");
+			s.append("&user_id='" + usuarioId + "'");
 			
 			Log.d("request_save", s.toString());
 	
