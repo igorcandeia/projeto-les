@@ -1,14 +1,12 @@
 package com.mowatcher.activity;
 
-import com.mowatcher.MainActivity;
-import com.mowatcher.R;
-import com.mowatcher.R.id;
-import com.mowatcher.R.menu;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.mowatcher.MainActivity;
+import com.mowatcher.R;
 
 public class BaseActivity extends Activity {
 

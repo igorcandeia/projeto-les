@@ -3,6 +3,7 @@ package com.mowatcher;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,14 +33,12 @@ public class MainActivity extends BaseActivity {
 		// popula o BD com o atividades já pré-cadastradas
 		new DatabaseSeed().populaBD();
 		
-		gerenciador = new GerenciadorTempo();
-		
 		// Todas as transações que envolvem requisição tem quer ser seguidas por
 		// uma thread nesse estilo, para evitar nullpointerexception
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				gerenciador.loadAndSyncronizedTIS("jose@gmail.com"); // carrega os tis remotamente
+				gerenciador.loadAndSyncronizedTIS(1L); // carrega os tis remotamente
 				List<TempoInvestido> tempos = gerenciador.getTIs();
 				if (tempos != null) {
 					Log.d("Json tst", tempos.toString());
@@ -59,22 +58,16 @@ public class MainActivity extends BaseActivity {
 			
 			float horas = Float.parseFloat(horasField.getText().toString());
 			String nome = atividadeField.getText().toString();
-			final TempoInvestido ti = new TempoInvestido(nome, 
+			
+			TempoInvestido ti = new TempoInvestido(nome, 
 						horas, 
 						EnumTipo.LAZER, 
 						EnumPrioridade.BAIXA,
 						new GregorianCalendar());
 			
 			// Todas as transações que envolvem requisição tem quer ser seguidas por
-			// uma thread nesse estilo, para evitar nullpointerexception
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					gerenciador.adicionaTI(ti, 12342); // ti , idUser
-					Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
-				}
-			}).start();	
-			
+			// uma tarefa assyncrona nesse estilo, para evitar nullpointerexception
+			new SaveTI().execute(ti);
 		}
 	}
 
@@ -85,5 +78,31 @@ public class MainActivity extends BaseActivity {
 			return false;
 		}
 		return true;
+	}
+	
+	/**
+	 * Tarefa Assyncrona para salvar um Tempo Investido remotamente.
+	 */
+	class SaveTI extends AsyncTask<TempoInvestido, Integer, Long> {
+		/**
+		 * É executado em uma nova thread, para fazer a requisição.
+		 */
+		protected Long doInBackground(TempoInvestido... tempos) {
+			for (TempoInvestido t: tempos) {
+				gerenciador.adicionaTI(t, 1L); // salva o ti remotamente.
+			}
+			return 0L;
+		}
+		protected void onProgressUpdate(Integer... progress) {
+			// setProgressPercen(progress[0]);
+		}
+
+		/**
+		 * É executado ao fim do doInBackground e é chamado na thread original
+		 * da activity.
+		 */
+		protected void onPostExecute(Long result) {
+			Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
+		}
 	}
 }

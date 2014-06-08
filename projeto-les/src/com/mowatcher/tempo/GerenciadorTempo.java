@@ -17,14 +17,15 @@ public class GerenciadorTempo {
 	private List<TempoInvestido> tIs;
 
 	public GerenciadorTempo() {
+		tIs = new ArrayList<TempoInvestido>();
 	}
 	
-	public void loadAndSyncronizedTIS(String emailUser) {
+	public void loadAndSyncronizedTIS(Long userId) {
 		if (AppConfig.BD_LOCAL) {
 			tIs = TempoInvestido.getAll();
 		}
 		if (AppConfig.BD_REMOTE) {
-			tIs = new RequestManager().loadTIS(emailUser);
+			tIs = new RequestManager().loadTIS(userId);
 		}
 	}
 	
@@ -40,7 +41,7 @@ public class GerenciadorTempo {
 		return atividades;
 	}
 
-	public void adicionaTI(TempoInvestido tI, int userID) {
+	public void adicionaTI(TempoInvestido tI, Long userID) {
 		tIs.add(tI);
 		if (AppConfig.BD_LOCAL) {
 			tI.save(); // salva no BD o T.I.

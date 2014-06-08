@@ -1,6 +1,9 @@
 package com.mowatcher.util;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -54,25 +57,30 @@ public class RequestManager {
 	 * Envia uma requisição do tipo GET para o servidor, com o intuido de salvar
 	 * determinado TI de um usuário
 	 */
-	public boolean saveTI(TempoInvestido ti, int usuarioId) {
-		StringBuilder s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
-		s.append("ano=" + ti.getAno());
-		s.append("&atividade=" + ti.getAtividade());
-		s.append("&data=" + ti.getData().getTime());
-		s.append("&prioridade=" + ti.getPrioridade());
-		s.append("&semanaDoAno=" + ti.getSemanaDoAno());
-		s.append("&tempo=" + ti.getTempo());
-		s.append("&tipo=" + ti.getTipo());
-		s.append("&user_id=" + usuarioId);
-
-		HttpClient client = new DefaultHttpClient();
-		HttpGet get = new HttpGet(s.toString());
-		ResponseHandler<String> responseHandler = new BasicResponseHandler();
-
+	public boolean saveTI(TempoInvestido ti, Long usuarioId) {
 		try {
+			
+			StringBuilder s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
+			s.append("ano=" + ti.getAno());
+			s.append("&atividade=" + URLEncoder.encode(ti.getAtividade(), "UTF-8"));
+			s.append("&data=" + ti.getData().getTime());
+			s.append("&prioridade=" + ti.getPrioridade());
+			s.append("&semanaDoAno=" + ti.getSemanaDoAno());
+			s.append("&tempo=" + ti.getTempo());
+			s.append("&tipo=" + ti.getTipo());
+			s.append("&user_id=" + usuarioId);
+			
+			Log.d("request_save", s.toString());
+	
+			HttpClient client = new DefaultHttpClient();
+			HttpGet get = new HttpGet(s.toString());
+			ResponseHandler<String> responseHandler = new BasicResponseHandler();
+			
 			String response = client.execute(get, responseHandler);
 			Log.d("Save TI Success", response);
 			return true;
+		} catch (UnsupportedEncodingException e1) {
+			Log.d("Save TI Erro", e1.getMessage());
 		} catch (ClientProtocolException e) {
 			Log.d("Save TI Erro", e.getMessage());
 		} catch (IOException e) {
@@ -93,11 +101,11 @@ public class RequestManager {
 	 * {"atividade":"algumacoisa","tempo":"20","tipo":"LAZER","prioridade":"ALTA","data":"1401839455670"}, 
 	 * {"atividade":"outracoisa","tempo":"20","tipo":"LAZER","prioridade":"ALTA","data":"1401839455670" } ]}
 	 */
-	public List<TempoInvestido> loadTIS(final String email) {
+	public List<TempoInvestido> loadTIS(Long userID) {
 		List<TempoInvestido> tempos = null;
 		JSONObject json;
 		try {	
-			json = JsonRead.readJsonFromUrl(AppConfig.HOST_PORT + "?email="+ email);
+			json = JsonRead.readJsonFromUrl(AppConfig.HOST_PORT + "get_db?user_id="+ userID);
 			//json = new JSONObject(getJsonTest());
 		
 			JSONArray tis = json.getJSONArray("atividades");
@@ -108,8 +116,8 @@ public class RequestManager {
 
 				String atividade = child.getString("atividade");
 				float tempo = Float.parseFloat(child.getString("tempo"));
-				EnumTipo tipo = EnumTipo.valueOf(child.getString("tipo"));
-				EnumPrioridade prioridade = EnumPrioridade.valueOf(child.getString("prioridade"));
+				EnumTipo tipo = EnumTipo.valueOf( child.getString("tipo").toUpperCase());
+				EnumPrioridade prioridade = EnumPrioridade.valueOf(child.getString("prioridade").toUpperCase());
 				Long milli = Long.parseLong(child.getString("data"));
 
 				GregorianCalendar c = new GregorianCalendar();
@@ -121,10 +129,9 @@ public class RequestManager {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.d("Load TIs Erro IO", e.getMessage());
 		} catch (JSONException e) {
-			Log.d("Load TIs Erro", e.getMessage());
+			Log.d("Load TIs Erro JSON", e.getMessage());
 		}
 		return tempos;
 	}
