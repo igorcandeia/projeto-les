@@ -25,7 +25,7 @@ public class RelatorioSemanal extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_relatorio_semanal);
-				
+		
 		new AtualizaListagem().execute();
 	}
 	
@@ -34,19 +34,33 @@ public class RelatorioSemanal extends BaseActivity {
 		Collection<Float> tempos = gerenciador.getAtividadesMaisRecentes().values();
 		String parserAtv = "";
 		String parserTmp = "";
+		String parserPer = "";
 		
+		int i =0;
 		for (String a: atividades) {
 			try {
-				parserAtv += URLEncoder.encode(a, "utf-8") + "|";
+				parserAtv += URLEncoder.encode(a, "utf-8");
+				if (i < tempos.size() -1) {
+					parserAtv += "|";
+				}
+				i++;
 			} catch (UnsupportedEncodingException e) {
 				Log.d("URL Encoder erro", e.getMessage());
 			}
 		}
-		int i =0;
+		i = 0;
 		for (Float t: tempos) {
 			parserTmp += t.intValue();
 			if (i < tempos.size() -1) {
 				parserTmp += ",";
+			}
+			i++;
+		}
+		i =0;
+		for (Float t: tempos) {
+			parserPer += t.intValue() + "+horas";
+			if (i < tempos.size() -1) {
+				parserPer += "|";
 			}
 			i++;
 		}
@@ -59,8 +73,8 @@ public class RelatorioSemanal extends BaseActivity {
 				"chxt=x,y&" + // imprime os valores dos eixos X, Y
 				"chs=" + 700 + "x" + (300) + "&" + // define o tamanho da imagem
 				"chd=t:" + parserTmp +"&" + // valor de cada coluna do gráfico
-				"chl=" + parserAtv + "&" + // rótulo para cada coluna
-				"chdl=Atividades&" + // legenda do gráfico
+				"chl=" + parserPer + "&" + // rótulo para cada coluna
+				"chdl=" + parserAtv + "&" + // legenda do gráfico
 				"chxr=1,0,50&" + // define o valor de início e fim do eixo
 				"chds=0,50&" + // define o valor de escala dos dados
 				"chg=0,5,0,0&" + // desenha linha horizontal na grade
