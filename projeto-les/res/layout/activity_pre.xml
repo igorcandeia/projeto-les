@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#800"
+    android:orientation="vertical"
+    tools:context=".PreActivity" >
+
+    <Button
+        android:id="@+id/novoTI_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:background="#FFF"
+        android:text="Novo TI" />
+
+    <Button
+        android:id="@+id/acompanhamento_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFF"
+        android:text="Acompanhamento" />
+
+    <Button
+        android:id="@+id/historico_bt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="#FFF"
+        android:text="historico" />
+
+</LinearLayout>

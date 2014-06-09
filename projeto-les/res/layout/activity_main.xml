@@ -1,9 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="#FFF"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -15,65 +15,88 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/bem_vindo"
+        android:text="@string/novoTI"
+        android:textColor="#A00"
         android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:text="@string/ti"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <EditText
+        android:id="@+id/campoHoras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="7"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewHoras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/horas"
+        android:textSize="15sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
         android:text="@string/atividade"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/horasGastas"
+
+	<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    <EditText
+        android:id="@+id/campoAtividade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/campoAtividade"
-        android:layout_below="@+id/campoAtividade"
-        android:layout_marginTop="66dp"
-        android:text="@string/horas"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:ems="10" 
+        android:inputType="text"/>
+
+    <Button
+        android:id="@+id/maisAtividade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/mais" />
+    </LinearLayout>
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent">
 
     <Button
         android:id="@+id/btnConfirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/campoHoras"
-        android:layout_marginRight="49dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:onClick="cadastrarAtividade"
         android:text="@string/ok" />
-
-    <EditText
-        android:id="@+id/campoAtividade"
+    <Button
+        android:id="@+id/btnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="47dp"
-        android:ems="10" android:inputType=""/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:text="@string/cancel" />
 
-    <EditText
-        android:id="@+id/campoHoras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/horasGastas"
-        android:layout_below="@+id/horasGastas"
-        android:layout_marginTop="63dp"
-        android:ems="10"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
-
-</RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

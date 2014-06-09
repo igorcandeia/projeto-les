@@ -37,9 +37,18 @@
             android:name="com.mowatcher.activity.ListagemActivity"
             android:label="@string/title_activity_listagem_" >
         </activity>
+		<activity
+	            android:name="com.mowatcher.activity.RelatorioSemanal"
+	            android:label="@string/title_activity_relatorio_semanal" >
+		</activity>
         <activity
-            android:name="com.mowatcher.activity.RelatorioSemanal"
-            android:label="@string/title_activity_relatorio_semanal" >
+            android:name="com.mowatcher.PreActivity"
+            android:label="@string/title_activity_pre" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
