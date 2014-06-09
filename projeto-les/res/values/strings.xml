@@ -3,19 +3,22 @@
 
     <string name="app_name">MoWatcher</string>
     <string name="action_settings">Settings</string>
-    <string name="bem_vindo">Bem Vindo ao Time Manager!</string>
+    <string name="bem_vindo">Bem Vindo ao MoWatcher!</string>
     <string name="hello_world">Hello world!</string>
 
     <color name="gray">#222</color>
 
-    <string name="horas">Horas Gastas</string>
+    <string name="ti">Tempo Investido</string>
     <string name="atividade">Atividade Realizada</string>
     <string name="ok">OK</string>
     <string name="ver_tarefas">Ver Tarefas</string>
     <string name="ver_relatorio">Ver Relatorio</string>
     <string name="title_activity_listagem_">ListagemActivity</string>
     <string name="cadastrar_atividade">Cadastrar Atv.</string>
-    
+    <string name="title_activity_pre">PreActivity</string>
+    <string name="novoTI">Novo TI</string>
+    <string name="horas">horas</string>
+    <string name="cancel">Cancel</string>
     
 
 </resources>

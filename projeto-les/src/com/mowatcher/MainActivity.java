@@ -3,15 +3,18 @@ package com.mowatcher;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.mowatcher.activity.BaseActivity;
+import com.mowatcher.activity.ListagemActivity;
 import com.mowatcher.tempo.EnumPrioridade;
 import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
@@ -32,6 +35,16 @@ public class MainActivity extends BaseActivity {
 		
 		// popula o BD com o atividades já pré-cadastradas
 		new DatabaseSeed().populaBD();
+		
+		Button cancel = (Button)findViewById(R.id.btnCancel);
+	    cancel.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MainActivity.this, PreActivity.class);
+				startActivity(i);
+			}
+		});
 	}
 	
 	public void cadastrarAtividade(View v) {
