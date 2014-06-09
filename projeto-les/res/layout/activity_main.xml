@@ -33,7 +33,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/horasGastas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/campoAtividade"
@@ -67,8 +67,8 @@
         android:id="@+id/campoHoras"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/horasGastas"
+        android:layout_below="@+id/horasGastas"
         android:layout_marginTop="63dp"
         android:ems="10"
         android:inputType="numberDecimal" >

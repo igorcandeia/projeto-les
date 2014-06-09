@@ -2,9 +2,10 @@ package com.mowatcher.tempo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.mowatcher.util.AppConfig;
 import com.mowatcher.util.RequestManager;
@@ -51,21 +52,29 @@ public class GerenciadorTempo {
 		}
 	}
 
-	public String[] getAtividadesMaisRecentes() {
-		List<String> atividades = new ArrayList<String>();
+	public Map<String, Float> getAtividadesMaisRecentes() {
+		Map<String,Float> mapaAtividades = new HashMap<String, Float>();
 		Calendar calendario = new GregorianCalendar();
 		for (TempoInvestido t : tIs) {
+			
 			if ((t.getSemanaDoAno() == calendario.get(Calendar.WEEK_OF_YEAR))
 					&& (t.getAno() == calendario.get(Calendar.YEAR)))
-				atividades.add(t.getAtividade());
+				if (mapaAtividades.get(t.getAtividade()) == null) {
+					mapaAtividades.put(t.getAtividade(), t.getTempo());
+				} else {
+					mapaAtividades.put(t.getAtividade(),
+							mapaAtividades.get(t.getAtividade()) + t.getTempo());
+				}
 		}
-		String[] array = {};
-		return atividades.toArray(array);
+		return mapaAtividades;
 	}
 
+	
+	
 	/**
 	 * semana=0 => semana atual, semana=1 => semana passada.
 	 */
+	/*
 	public List<VisualizacaoRelatorio> getRelatorioSemanal(int semana) {
 		String[] atividades = getAtividadesMaisRecentes();
 		List<VisualizacaoRelatorio> relatorioSemanal = new ArrayList<VisualizacaoRelatorio>();
@@ -81,6 +90,7 @@ public class GerenciadorTempo {
 		Collections.sort(relatorioSemanal);
 		return relatorioSemanal;
 	}
+	*/
 
 	public float[] getPercentualUso(int semana) {
 		List<TempoInvestido> tempos = getTemposSemana(semana);
@@ -183,5 +193,14 @@ public class GerenciadorTempo {
 				tempos.add(t);
 		}
 		return tempos;
+	}
+	
+	public float getHorasSemana(int semana) {
+		float sum = 0;
+		List<TempoInvestido> tempos = getTemposSemana(semana);
+		for (TempoInvestido t: tempos) {
+			sum += t.getTempo();
+		}
+		return sum;
 	}
 }

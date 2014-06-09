@@ -19,12 +19,14 @@ public class BaseActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+			case R.id.ver_relatorio:
+				Intent rel_semanal = new Intent(this, RelatorioSemanal.class);
+				startActivity(rel_semanal);
+				break;
 			case R.id.ver_listagem:
 				Intent listagem = new Intent(this, ListagemActivity.class);
 				startActivity(listagem);
 				break;
-			case R.id.ver_relatorio:
-	
 			default:
 				Intent main = new Intent(this, MainActivity.class);
 				startActivity(main);
