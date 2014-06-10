@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mowatcher.MainActivity;
 import com.mowatcher.R;
 
 public class BaseActivity extends Activity {
@@ -28,7 +27,7 @@ public class BaseActivity extends Activity {
 				startActivity(listagem);
 				break;
 			default:
-				Intent main = new Intent(this, MainActivity.class);
+				Intent main = new Intent(this, CadastrarTIActivity.class);
 				startActivity(main);
 				break;
 		}

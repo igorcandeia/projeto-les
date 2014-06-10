@@ -7,7 +7,9 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
+import com.mowatcher.activity.CadastrarTIActivity;
 import com.mowatcher.activity.ListagemActivity;
+import com.mowatcher.activity.RelatorioSemanal;
 
 public class PreActivity extends Activity {
 
@@ -27,7 +29,7 @@ public class PreActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(PreActivity.this, MainActivity.class);
+				Intent i = new Intent(PreActivity.this, CadastrarTIActivity.class);
 				startActivity(i);
 			}
 		});
@@ -38,7 +40,7 @@ public class PreActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(PreActivity.this, ListagemActivity.class);
+				Intent i = new Intent(PreActivity.this, RelatorioSemanal.class);
 				startActivity(i);
 			}
 		});

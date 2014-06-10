@@ -1,4 +1,4 @@
-package com.mowatcher;
+package com.mowatcher.activity;
 
 import java.util.GregorianCalendar;
 
@@ -11,14 +11,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.mowatcher.activity.BaseActivity;
+import com.mowatcher.PreActivity;
+import com.mowatcher.R;
+import com.mowatcher.R.id;
+import com.mowatcher.R.layout;
 import com.mowatcher.tempo.EnumPrioridade;
 import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.GerenciadorTempo;
 import com.mowatcher.tempo.TempoInvestido;
 import com.mowatcher.util.DatabaseSeed;
 
-public class MainActivity extends BaseActivity {
+public class CadastrarTIActivity extends BaseActivity {
 
 	GerenciadorTempo gerenciador = new GerenciadorTempo();
 	ListView listField;
@@ -38,7 +41,7 @@ public class MainActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(MainActivity.this, PreActivity.class);
+				Intent i = new Intent(CadastrarTIActivity.this, PreActivity.class);
 				startActivity(i);
 			}
 		});
@@ -97,7 +100,7 @@ public class MainActivity extends BaseActivity {
 		 * da activity.
 		 */
 		protected void onPostExecute(Long result) {
-			Toast.makeText(MainActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
+			Toast.makeText(CadastrarTIActivity.this, "Atividade Adicionada", Toast.LENGTH_LONG).show();
 		}
 	}
 }
