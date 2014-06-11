@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <!--<link rel="shortcut icon" href="../../assets/ico/favicon.ico"> -->
 
-    <title>DailyWatcher - Save your Time</title>
+    <title>MoWatcher - Moment Watcher</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,16 +39,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">DailyWatcher</a>
+              <a class="navbar-brand" href="#">MoWatcher</a>
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
+                <li><a href="dev.html" id='bt_dev' onclick="show_developers();">Desenvolvedores</a></li>
+             <!--    <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
+                 <ul class="dropdown-menu">
                     <li><a href="#">Action</a></li>
                     <li><a href="#">Another action</a></li>
                     <li><a href="#">Something else here</a></li>
@@ -56,8 +55,8 @@
                     <li class="dropdown-header">Nav header</li>
                     <li><a href="#">Separated link</a></li>
                     <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
+              </ul> 
+                </li>-->
               </ul>
             </div>
           </div>
@@ -78,32 +77,31 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <img src='img/1.jpg'>
+          <img src='img/biblioteca.jpg'>
           <div class="container">
             <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+              <h1>MoWatcher</h1>
+              <p> 'Tempo é dinheiro' é o que dizem. Todos concordamos que o tempo é importante para uma vida equilibrada e balanceada. Gostaria de aproveitar melhor seu tempo e saber com que você gasta seus preciosos minutos? Talvez assim, você possa se dedicar aquele livro antigo ou aquele projeto que nunca saiu da gaveta</p>
             </div>
           </div>
         </div>
         <div class="item">
        <!--   <img data-src="holder.js/900x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iOTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzY2NiI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjQ1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojNmE2YTZhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjU2cHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+U2Vjb25kIHNsaWRlPC90ZXh0Pjwvc3ZnPg==">-->
-          <img src='img/home-office.jpg'>
+          <img src='img/1.jpg'>
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>MoWatcher</h1>
+              <p>Saiba exatamente o que está fazendo do seu tempo. MoWatcher o ajudará à organizar seus dias e suas atividades de modo que você sempre saiba que fez o melhor possível do seu tempo</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-           <img src='img/2.jpg'>
+           <img src='img/family.jpg'>
            <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <h1>MoWatcher</h1>
+              <p> Está trabalhando demais? Que tal trabalhar apenas o necessário? MoWatcher pode te ajudar. Com ele você pode comparar suas semanas e ver se está cumprindo suas próprias metas. Não deixe mais o tempo escorrer pelas suas mãos. O importante é o agora.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
             </div>
           </div>
@@ -119,68 +117,34 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
-    <div class="container marketing">
+    <div id='container-1' class="container marketing">
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" src = "img/4.jpg">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+          <h2>Seja Mais Feliz</h2>
+          <p> Os relatórios personalizados mostrarão como está a sua semana. Ela está produtiva? Quais são suas prioridades? Você está realmente fazendo o que deveria fazer? Desde jogos até o seu trabalho, tenha a exata noção das atividades que executa durante sua semana</p>
+          
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img class="img-circle"  src = 'img/5.jpg' >
-          <h2>Heading</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+          <h2>Portabilidade</h2>
+          <p>Aproveite o conforto do seu lar. MoWatcher é acessível de qualquer aparelho com o sistema android via internet. Você prefere tablet? Sem problema. Você é daqueles que adora ter todos os dispositivos recém lançados no mercado? Não tem problema. Você pode acessar suas atividades de qualquer dispositivo à qualquer hora</p>
+          
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle"  src = 'img/6.jpg' >
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+          <img class="img-circle"  src = 'img/mowatcher.jpg' >
+          <h2>A Solução</h2>
+          <p>Você gosta de organizar suas tarefas por prioridade? MoWatcher pode ajudar você. Organize seu tempo investido da maneira que quiser e com a prioridade que preferir. Assim poderá saber quanto tempo você está investindo nas atividades que considera mais importantes.</p>
+          
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 
 
-      <!-- START THE FEATURETTES -->
 
-      <hr class="featurette-divider">
 
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" src = 'img/7.jpg'> 
-          </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive" src = 'img/8.jpg'> 
-          </div>
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-         <img class="featurette-image img-responsive" src = 'img/9.jpg'> 
-         </div>
-      </div>
+		
 
       <hr class="featurette-divider">
 
@@ -190,10 +154,11 @@
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>© 2014 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+        <p>© 2014 Mowatcher </p>
       </footer>
 
     </div><!-- /.container -->
+
 
 
     <!-- Bootstrap core JavaScript
@@ -201,6 +166,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/scriptsUI/menuconfig.js"></script>
     <script src="js/docs.min.js"></script>
   
 
