@@ -14,11 +14,6 @@
         android:showAsAction="always"
         />
     <item 
-        android:id="@+id/ver_listagem"
-        android:title="@string/ver_tarefas"
-        android:showAsAction="always"
-        />
-    <item 
         android:id="@+id/ver_relatorio"
         android:title="@string/ver_relatorio"
         android:showAsAction="always"

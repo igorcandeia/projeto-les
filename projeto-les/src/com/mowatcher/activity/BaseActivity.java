@@ -22,10 +22,6 @@ public class BaseActivity extends Activity {
 				Intent rel_semanal = new Intent(this, RelatorioSemanal.class);
 				startActivity(rel_semanal);
 				break;
-			case R.id.ver_listagem:
-				Intent listagem = new Intent(this, ListagemActivity.class);
-				startActivity(listagem);
-				break;
 			default:
 				Intent main = new Intent(this, CadastrarTIActivity.class);
 				startActivity(main);

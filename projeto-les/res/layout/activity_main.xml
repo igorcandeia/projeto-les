@@ -28,25 +28,28 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp"
         android:textStyle="bold" />
-    <LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-    <EditText
-        android:id="@+id/campoHoras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="7"
-        android:inputType="numberDecimal" >
 
-        <requestFocus />
-    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/textViewHoras"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/horas"
-        android:textSize="15sp" />
+        <EditText
+            android:id="@+id/campoHoras"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.68"
+            android:ems="7"
+            android:inputType="numberDecimal" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textViewHoras"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/horas"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <TextView
@@ -59,44 +62,29 @@
         android:textSize="25sp"
         android:textStyle="bold" />
 
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
 
-	<LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-    <EditText
-        android:id="@+id/campoAtividade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10" 
-        android:inputType="text"/>
+	    <EditText
+	        android:id="@+id/campoAtividade"
+	        android:layout_width="127dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="0.65"
+	        android:ems="10"
+	        android:inputType="text" />
 
-    <Button
-        android:id="@+id/maisAtividade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/mais" />
-    </LinearLayout>
+	    <Button
+	        android:id="@+id/btnConfirm"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:onClick="cadastrarAtividade"
+	        android:text="@string/ok" />
+	</LinearLayout>
+
 	<RelativeLayout 
 	    android:layout_width="match_parent"
     	android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/btnConfirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:onClick="cadastrarAtividade"
-        android:text="@string/ok" />
-    <Button
-        android:id="@+id/btnCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:text="@string/cancel" />
 
     </RelativeLayout>
 </LinearLayout>

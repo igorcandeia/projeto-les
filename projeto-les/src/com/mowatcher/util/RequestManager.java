@@ -19,6 +19,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.mowatcher.tempo.Atividade;
 import com.mowatcher.tempo.EnumPrioridade;
 import com.mowatcher.tempo.EnumTipo;
 import com.mowatcher.tempo.TempoInvestido;
@@ -61,12 +62,12 @@ public class RequestManager {
 			
 			StringBuilder s = new StringBuilder(AppConfig.HOST_PORT + "save_db?");
 			s.append("ano=" + ti.getAno());
-			s.append("&atividade='" + URLEncoder.encode(ti.getAtividade() , "utf-8")  + "'");
+			s.append("&atividade='" + URLEncoder.encode(ti.getAtividade().getNome() , "utf-8")  + "'");
 			s.append("&data='" + ti.getData().getTime() + "'");
-			s.append("&prioridade='" + ti.getPrioridade() + "'");
+			s.append("&prioridade='" + ti.getAtividade().getPrioridade() + "'");
 			s.append("&semanaDoAno=" + ti.getSemanaDoAno());
 			s.append("&tempo=" + ti.getTempo());
-			s.append("&tipo='" + ti.getTipo() + "'");
+			s.append("&tipo='" + ti.getAtividade().getTipo() + "'");
 			s.append("&user_id='" + usuarioId + "'");
 			
 			Log.d("request_save", s.toString());
@@ -122,8 +123,8 @@ public class RequestManager {
 				GregorianCalendar c = new GregorianCalendar();
 				c.setTimeInMillis(milli);
 
-				TempoInvestido t = new TempoInvestido(atividade, tempo, tipo,
-						prioridade, c);
+				Atividade a = new Atividade(atividade, tipo, prioridade);
+				TempoInvestido t = new TempoInvestido(a, tempo, c);
 				tempos.add(t);
 			}
 

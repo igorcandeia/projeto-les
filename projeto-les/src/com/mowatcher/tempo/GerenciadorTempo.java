@@ -34,17 +34,10 @@ public class GerenciadorTempo {
 		return tIs;
 	}
 
-	public List<String> getAtividades() {
-		List<String> atividades = new ArrayList<String>();
-		for (TempoInvestido t : tIs) {
-			atividades.add(t.getAtividade());
-		}
-		return atividades;
-	}
-
 	public void adicionaTI(TempoInvestido tI, Long userID) {
 		tIs.add(tI);
 		if (AppConfig.BD_LOCAL) {
+			tI.getAtividade().save();
 			tI.save(); // salva no BD o T.I.
 		}
 		if (AppConfig.BD_REMOTE) {
@@ -60,47 +53,29 @@ public class GerenciadorTempo {
 			if ((t.getSemanaDoAno() == calendario.get(Calendar.WEEK_OF_YEAR))
 					&& (t.getAno() == calendario.get(Calendar.YEAR)))
 				if (mapaAtividades.get(t.getAtividade()) == null) {
-					mapaAtividades.put(t.getAtividade(), t.getTempo());
+					mapaAtividades.put(t.getAtividade().getNome(), t.getTempo());
 				} else {
-					mapaAtividades.put(t.getAtividade(),
+					mapaAtividades.put(t.getAtividade().getNome(),
 							mapaAtividades.get(t.getAtividade()) + t.getTempo());
 				}
 		}
 		return mapaAtividades;
 	}
 
-	
-	
-	/**
-	 * semana=0 => semana atual, semana=1 => semana passada.
-	 */
-	/*
-	public List<VisualizacaoRelatorio> getRelatorioSemanal(int semana) {
-		String[] atividades = getAtividadesMaisRecentes();
-		List<VisualizacaoRelatorio> relatorioSemanal = new ArrayList<VisualizacaoRelatorio>();
-		List<TempoInvestido> tIs;
-		for (int i = 0; i< atividades.length; i++){
-			tIs = getTISAtividadeSemana(atividades[i], semana);
-			float total = 0;
-			for (TempoInvestido t : tIs) {
-				total += t.getTempo();
-			}
-			relatorioSemanal.add(new VisualizacaoRelatorio(atividades[i], total));
-		}
-		Collections.sort(relatorioSemanal);
-		return relatorioSemanal;
-	}
-	*/
-
 	public float[] getPercentualUso(int semana) {
 		List<TempoInvestido> tempos = getTemposSemana(semana);
 		float[] percentuais = { 0, 0 };
 		float total = 0;
 		for (TempoInvestido t : tempos) {
-			if (t.getTipo().equals(EnumTipo.LAZER)) {
-				percentuais[0] += t.getTempo();
-			} else if (t.getTipo().equals(EnumTipo.TRABALHO)) {
-				percentuais[1] += t.getTempo();
+			switch (t.getAtividade().getTipo()) {
+				case LAZER:
+					percentuais[0] += t.getTempo();
+					break;
+				case TRABALHO:
+					percentuais[1] += t.getTempo();
+					break;
+				default:
+					break;
 			}
 		}
 		for (int i = 0; i <= 1; i++) {
@@ -117,16 +92,24 @@ public class GerenciadorTempo {
 		float[] percentuais = { 0, 0, 0, 0, 0 };
 		float total = 0;
 		for (TempoInvestido t : tempos) {
-			if (t.getPrioridade().equals(EnumPrioridade.BAIXISSIMA)) {
-				percentuais[0] += t.getTempo();
-			} else if (t.getPrioridade().equals(EnumPrioridade.BAIXA)) {
-				percentuais[1] += t.getTempo();
-			} else if (t.getPrioridade().equals(EnumPrioridade.MEDIA)) {
-				percentuais[2] += t.getTempo();
-			} else if (t.getPrioridade().equals(EnumPrioridade.ALTA)) {
-				percentuais[3] += t.getTempo();
-			} else if (t.getPrioridade().equals(EnumPrioridade.ALTISSIMA)) {
-				percentuais[4] += t.getTempo();
+			switch (t.getAtividade().getPrioridade()) {
+				case BAIXISSIMA:
+					percentuais[0] += t.getTempo();
+					break;
+				case BAIXA:
+					percentuais[1] += t.getTempo();
+					break;
+				case MEDIA:
+					percentuais[2] += t.getTempo();
+					break;
+				case ALTA:
+					percentuais[3] += t.getTempo();
+					break;
+				case ALTISSIMA:
+					percentuais[4] += t.getTempo();
+					break;
+				default:
+					break;
 			}
 		}
 		for (int i = 0; i <= 4; i++) {
@@ -173,8 +156,9 @@ public class GerenciadorTempo {
 		int sem = c.get(Calendar.WEEK_OF_YEAR);
 		int ano = c.get(Calendar.YEAR);
 		for (TempoInvestido t: tIs) {
-			if (t.getAno() == ano && t.getSemanaDoAno() == sem)
+			if (t.getAno() == ano && t.getSemanaDoAno() == sem) {
 				tempos.add(t);
+			}
 		}
 		return tempos;
 	}
@@ -189,8 +173,9 @@ public class GerenciadorTempo {
 		List<TempoInvestido> tempos = new ArrayList<TempoInvestido>();
 		List<TempoInvestido> temposDaSemana = getTemposSemana(semana);
 		for (TempoInvestido t: temposDaSemana) {
-			if (t.getAtividade() == atividade)
+			if (t.getAtividade().getNome().equals(atividade)) {
 				tempos.add(t);
+			}
 		}
 		return tempos;
 	}

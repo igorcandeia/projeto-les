@@ -1,28 +1,35 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/containerRS"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context="com.mowatcher.activity.RelatorioSemanal"
-    tools:ignore="MergeRootFrame" 
-    android:background="#FFFFFF">
+    tools:ignore="MergeRootFrame" >
+
+    <TextView
+        android:id="@+id/horasSemana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/textView1" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/wvGrafico"
+        android:layout_centerHorizontal="true"
         android:text="@string/horas_gastas_semana" />
 
-    <TextView
-        android:id="@+id/horasSemana"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    
     <WebView
         android:id="@+id/wvGrafico"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:layout_gravity="center"/> 
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/horasSemana"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp" />
 
-</LinearLayout>
+</RelativeLayout>
