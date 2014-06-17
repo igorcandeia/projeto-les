@@ -14,13 +14,13 @@ import com.mowatcher.util.RequestManager;
  * Classe controladora do tempo investido em uma atividade
  */
 public class GerenciadorTempo {
-	
+
 	private List<TempoInvestido> tIs;
 
 	public GerenciadorTempo() {
 		tIs = new ArrayList<TempoInvestido>();
 	}
-	
+
 	public void loadAndSyncronizedTIS(Long userId) {
 		if (AppConfig.BD_LOCAL) {
 			tIs = TempoInvestido.getAll();
@@ -29,7 +29,7 @@ public class GerenciadorTempo {
 			tIs = new RequestManager().loadTIS(userId);
 		}
 	}
-	
+
 	public List<TempoInvestido> getTIs() {
 		return tIs;
 	}
@@ -49,7 +49,7 @@ public class GerenciadorTempo {
 		Map<String,Float> mapaAtividades = new HashMap<String, Float>();
 		Calendar calendario = new GregorianCalendar();
 		for (TempoInvestido t : tIs) {
-			
+
 			if ((t.getSemanaDoAno() == calendario.get(Calendar.WEEK_OF_YEAR))
 					&& (t.getAno() == calendario.get(Calendar.YEAR)))
 				if (mapaAtividades.get(t.getAtividade()) == null) {
@@ -68,6 +68,31 @@ public class GerenciadorTempo {
 		float total = 0;
 		for (TempoInvestido t : tempos) {
 			switch (t.getAtividade().getTipo()) {
+			case LAZER:
+				percentuais[0] += t.getTempo();
+				break;
+			case TRABALHO:
+				percentuais[1] += t.getTempo();
+				break;
+			default:
+				break;
+			}
+		}
+		for (int i = 0; i <= 1; i++) {
+			total += percentuais[i];
+		}
+		for (int i = 0; i <= 1; i++) {
+			percentuais[i] /= total;
+		}
+		return percentuais;
+	}
+	public float[] getPercentualUso(List<Atividade> atividades, int semana) {
+		List<TempoInvestido> tempos = getTemposSemana(semana);
+		float[] percentuais = { 0, 0 };
+		float total = 0;
+		for (TempoInvestido t : tempos) {
+			if (atividades.contains(t.getAtividade())){
+				switch (t.getAtividade().getTipo()) {
 				case LAZER:
 					percentuais[0] += t.getTempo();
 					break;
@@ -76,6 +101,7 @@ public class GerenciadorTempo {
 					break;
 				default:
 					break;
+				}
 			}
 		}
 		for (int i = 0; i <= 1; i++) {
@@ -93,6 +119,41 @@ public class GerenciadorTempo {
 		float total = 0;
 		for (TempoInvestido t : tempos) {
 			switch (t.getAtividade().getPrioridade()) {
+			case BAIXISSIMA:
+				percentuais[0] += t.getTempo();
+				break;
+			case BAIXA:
+				percentuais[1] += t.getTempo();
+				break;
+			case MEDIA:
+				percentuais[2] += t.getTempo();
+				break;
+			case ALTA:
+				percentuais[3] += t.getTempo();
+				break;
+			case ALTISSIMA:
+				percentuais[4] += t.getTempo();
+				break;
+			default:
+				break;
+			}
+		}
+		for (int i = 0; i <= 4; i++) {
+			total += percentuais[i];
+		}
+		for (int i = 0; i <= 4; i++) {
+			percentuais[i] /= total;
+		}
+		return percentuais;
+	}
+	
+	public float[] getPercentualPrioridade(List<Atividade> atividades, int semana) {
+		List<TempoInvestido> tempos = getTemposSemana(semana);
+		float[] percentuais = { 0, 0, 0, 0, 0 };
+		float total = 0;
+		for (TempoInvestido t : tempos) {
+			if (atividades.contains(t.getAtividade())){
+				switch (t.getAtividade().getPrioridade()) {
 				case BAIXISSIMA:
 					percentuais[0] += t.getTempo();
 					break;
@@ -110,6 +171,7 @@ public class GerenciadorTempo {
 					break;
 				default:
 					break;
+				}
 			}
 		}
 		for (int i = 0; i <= 4; i++) {
@@ -120,7 +182,7 @@ public class GerenciadorTempo {
 		}
 		return percentuais;
 	}
-	
+
 	/**
 	 * Retorna os tempos de um determinado dia de uma semana
 	 * dia = 0 => domingo
@@ -145,7 +207,7 @@ public class GerenciadorTempo {
 	 */
 	public List<TempoInvestido> getTemposSemana(int semana) {
 		List<TempoInvestido> tempos = new ArrayList<TempoInvestido>();
-		
+
 		Calendar cal = Calendar.getInstance();
 		// data de X semanas atrás
 		Calendar c = new GregorianCalendar(
@@ -162,7 +224,7 @@ public class GerenciadorTempo {
 		}
 		return tempos;
 	}
-	
+
 	/**
 	 * Retorna os Tempos Investidos de uma certa semana começando do domingo que
 	 * tenham como atividade a atividade passada como parâmetro.
@@ -179,7 +241,7 @@ public class GerenciadorTempo {
 		}
 		return tempos;
 	}
-	
+
 	public float getHorasSemana(int semana) {
 		float sum = 0;
 		List<TempoInvestido> tempos = getTemposSemana(semana);
