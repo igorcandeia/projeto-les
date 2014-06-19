@@ -21,5 +21,6 @@
     <string name="horas">horas</string>
     <string name="cancel">Cancel</string>
     <string name="horas_gastas_semana">Total de Horas Dessa Semana</string>
-
+    <string name="prioridade">Prioridade</string>
+    <string name="prioridade_prompt">Escolha a prioridade</string>
 </resources>
